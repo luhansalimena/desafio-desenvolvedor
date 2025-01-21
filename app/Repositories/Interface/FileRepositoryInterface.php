@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interface;
 
-use File;
+use App\Models\File;
 
 interface FileRepositoryInterface
 {
