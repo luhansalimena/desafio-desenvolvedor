@@ -15,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interface\FileRepositoryInterface::class,
             \App\Repositories\FileRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Interface\AssetRepositoryInterface::class,
+            \App\Repositories\AssetRepository::class
+        );
     }
 
     /**
