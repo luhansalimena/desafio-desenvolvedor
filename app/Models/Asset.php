@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Asset extends Model
 {
+    protected $connection = 'mongodb';
     protected $fillable = [
         'RptDt',
         'TckrSymb',
