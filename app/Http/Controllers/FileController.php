@@ -50,7 +50,10 @@ class FileController extends Controller
      */
     public function upload(FileUploadRequest $request, HandleUploadedFile $handleUploadedFile)
     {
-        return $handleUploadedFile->handle($request->file('file'), $request->fileHash);
+        $handleUploadedFile->handle($request->file('file'), $request->fileHash);
+        return response()->json([
+            'message' => 'File uploaded successfully',
+        ]);
     }
 
     /**
