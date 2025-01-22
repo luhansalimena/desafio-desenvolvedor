@@ -41,6 +41,8 @@ class HandleUploadedFile
             'name' => $file->getClientOriginalName(),
         ]);
 
+        $this->releaseLock($lock);
+
         return $file;
     }
 
