@@ -38,6 +38,7 @@ class HandleUploadedFile
 
         $this->fileRepository->store([
             'fileHash' => $fileHash,
+            'name' => $file->getClientOriginalName(),
         ]);
 
         return $file;
