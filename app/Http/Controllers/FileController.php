@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\File\HandleUploadedFile;
+use App\Actions\File\SearchFiles;
 use App\Http\Requests\FileUploadRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\SearchFilesRequest;
 
 class FileController extends Controller
 {
@@ -50,5 +51,57 @@ class FileController extends Controller
     public function upload(FileUploadRequest $request, HandleUploadedFile $handleUploadedFile)
     {
         return $handleUploadedFile->handle($request->file('file'), $request->fileHash);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/files",
+     *     summary="Get list of all files",
+     *     description="Returns a list of all uploaded files",
+     *     operationId="getFiles",
+     *     tags={"File"},
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string"
+     *         ),
+     *         description="Filter files by name"
+     *     ),
+     *     @OA\Parameter(
+     *         name="created_at",
+     *         in="query",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *             format="date-time"
+     *         ),
+     *         description="Filter files by creation date"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 property="files",
+     *                 type="array",
+     *                 @OA\Items(
+     *                     type="object",
+     *                     @OA\Property(property="id", type="integer", example=1),
+     *                     @OA\Property(property="name", type="string", example="document.pdf"),
+     *                     @OA\Property(property="path", type="string", example="/storage/uploads/document.pdf"),
+     *                     @OA\Property(property="created_at", type="string", format="date-time"),
+     *                     @OA\Property(property="updated_at", type="string", format="date-time")
+     *                 )
+     *             )
+     *         )
+     *     )
+     * )
+     */
+    public function index(SearchFilesRequest $request, SearchFiles $searchFiles)
+    {
+        return $searchFiles->handle($request->validated());
     }
 }
