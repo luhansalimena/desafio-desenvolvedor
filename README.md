@@ -45,4 +45,10 @@ Follow these steps to set up a Laravel Sail environment:
   ./vendor/bin/sail down
   ```
 
+- **Start the Queue Worker:**
+  ```sh
+  ./vendor/bin/sail artisan queue:work
+  ```
+
 For more information, refer to the [Laravel Sail documentation](https://laravel.com/docs/8.x/sail).
+
