@@ -48,6 +48,7 @@ class HandleUploadedFile
     {
         return Reader::createFromPath($file->getRealPath(), 'r')
             ->setDelimiter(';')
+            ->setHeaderOffset(1)
             ->mapHeader(array_column(FileHeaders::cases(), 'name'));
     }
 
